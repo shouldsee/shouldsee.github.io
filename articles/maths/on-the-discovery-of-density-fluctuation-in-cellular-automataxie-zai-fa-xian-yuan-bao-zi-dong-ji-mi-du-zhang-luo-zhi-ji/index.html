@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+    <head>
+	<meta charset="utf-8">
+
+<meta name="description" content="这个想法是在2017年3月7日凌晨，在伦敦的一台HP_Z600上初步实现的。整个发现的过程还是挺戏剧性的。 背景： 在这之前的一个月里我在MATLAB上断断续续从转移矩阵(transfer matrix)开始编起，发现没啥卵结果，然后在一篇文献上重新看到了Derrida Plot，也就是离散版本的Lyapunov Exponent，然后心中暗骂“Derrida这死脑筋干嘛要取平均值啊?"，并且在这样的心情中编写了derrida_general.m架构出了一个面向对象的流程结构，并且用协方差作为一个伪距离函数替代了平均值，获得了更多的信息。 这个时候的算法还是给了我一点小惊喜的，这直接导致我花了一个星期浏览它生成的Profile图片，大概收集了500条左右的有趣CA规则。但是浏览久了发现不对劲啊，这到底是我在筛选CA还是我的程序在筛选CA啊擦。（当然这个问题从我开始写算法时就一直有 …">
+<meta name="keywords" content="maths,story,chinese">
+<meta name="author" content="F. Geng">
+<meta name="robots" content="index,follow">
+
+
+<!-- OpenGraph -->
+<meta property="og:property" content="en">
+<meta property="og:title" content="On the discovery of density fluctuation in Cellular Automata//写在发现元胞自动机密度涨落之际">
+<meta property="og:type" content="article">
+<meta property="og:description" content="这个想法是在2017年3月7日凌晨，在伦敦的一台HP_Z600上初步实现的。整个发现的过程还是挺戏剧性的。 背景： 在这之前的一个月里我在MATLAB上断断续续从转移矩阵(transfer matrix)开始编起，发现没啥卵结果，然后在一篇文献上重新看到了Derrida Plot，也就是离散版本的Lyapunov Exponent，然后心中暗骂“Derrida这死脑筋干嘛要取平均值啊?"，并且在这样的心情中编写了derrida_general.m架构出了一个面向对象的流程结构，并且用协方差作为一个伪距离函数替代了平均值，获得了更多的信息。 这个时候的算法还是给了我一点小惊喜的，这直接导致我花了一个星期浏览它生成的Profile图片，大概收集了500条左右的有趣CA规则。但是浏览久了发现不对劲啊，这到底是我在筛选CA还是我的程序在筛选CA啊擦。（当然这个问题从我开始写算法时就一直有 …">
+<meta property="article:published_time" content="2017-03-07">
+<meta property="article:tag" content="maths">
+<meta property="article:tag" content="story">
+<meta property="article:tag" content="chinese">
+<meta property="article:section" content="maths">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>On the discovery of density fluctuation in Cellular Automata//写在发现元胞自动机密度涨落之际</title>
+	<script type="text/javascript" src="http://www.newflaw.com/blog/theme/js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="http://www.newflaw.com/blog/theme/js/bootstrap.js"></script>
+
+	<!-- Bootstrap CSS  -->
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/bootstrap.css"/>
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/responsive.css"/>
+	
+	<!-- Generated favicons markup -->
+	<link rel="apple-touch-icon" sizes="57x57" href="/assets/images/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/assets/images/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/images/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/assets/images/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/images/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/assets/images/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/images/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/assets/images/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/assets/images/favicons/manifest.json">
+	<link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
+	<meta name="msapplication-TileColor" content="#2b5797">
+	<meta name="msapplication-TileImage" content="/assets/images/favicons/mstile-144x144.png">
+	<meta name="msapplication-config" content="/assets/images/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<!-- LESS generated css for Nuja theme -->
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/NujaStructure.css"/>
+	<!-- Highlight -->
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/pygment.css"/>
+
+	<link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+	<!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+
+	<!-- setup feeds and third-party services -->
+	<link href="http://www.newflaw.com/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Newflaw Atom Feed" />
+	<!-- to clean up later for the new theme -->
+	<script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-968141-17', 'auto');
+ga('send', 'pageview');
+
+	</script>
+	<meta name="google-site-verification" content="4TETrzpAoVPu2-VrTpOxQJFmmynS9VzPq_boE45VKa8" />
+	<meta name="msvalidate.01" content="E2790C576E7623BE2F59AC965B48361D" />
+    </head>
+    <body>
+
+	<div class="container">
+	    <div class="header-container">
+		<header>
+		    <a href="http://www.newflaw.com/blog/">
+			<h4>Newflaw <span>Nature is never flawless</span></h4>		    </a>
+
+		    <nav>
+			<ul>
+			    <li><a href="http://www.newflaw.com/blog/">Home</a></li>
+			    <li><a href="http://www.newflaw.com/blog/about-me/">About Me</a></li>
+
+			    <li><a href="http://www.newflaw.com/blog/archives.html">Archive</a></li>
+
+			</ul>
+		    </nav>
+		</header>
+
+
+	    </div>
+	    <div class="clearfix"></div>
+	    <div class="row">
+		<div class="span9">
+
+		    <div class="span10">
+
+
+<div class="row">
+	
+	
+    <div class="span9 alpha">
+	<div class="entry-container ">
+
+	    <article  class="entry hentry" >
+		<header>
+		    <a href="http://www.newflaw.com/blog/articles/maths/on-the-discovery-of-density-fluctuation-in-cellular-automataxie-zai-fa-xian-yuan-bao-zi-dong-ji-mi-du-zhang-luo-zhi-ji/" rel="bookmark" title="permalink for On the discovery of density fluctuation in Cellular Automata//写在发现元胞自动机密度涨落之际" ><h2 class="entry-title">On the discovery of density fluctuation in Cellular Automata//写在发现元胞自动机密度涨落之际</h2></a>
+		    <div class="author-details vcard">
+
+			by <a  class="url fn" href="http://www.newflaw.com/blog/author/f-geng/">F. Geng</a>  
+		    . Category: <a href="http://www.newflaw.com/blog/category/maths.html">maths</a>. 
+			    Tags: 
+ <a href="http://www.newflaw.com/blog/tag/maths/" title="Browse tag: maths" rel="tag">maths</a>,  <a href="http://www.newflaw.com/blog/tag/story/" title="Browse tag: story" rel="tag">story</a>,  <a href="http://www.newflaw.com/blog/tag/chinese/" title="Browse tag: chinese" rel="tag">chinese</a>		    <br> Last Updated: March 07, 2017
+ 		</div>
+		</header>
+		<div class="entry-content">
+		<p>这个想法是在2017年3月7日凌晨，在伦敦的一台HP_Z600上初步实现的。整个发现的过程还是挺戏剧性的。</p>
+<p>背景：</p>
+<p>在这之前的一个月里我在MATLAB上断断续续从转移矩阵(transfer matrix)开始编起，发现没啥卵结果，然后在一篇文献上重新看到了Derrida Plot，也就是离散版本的Lyapunov Exponent，然后心中暗骂“Derrida这死脑筋干嘛要取平均值啊?"，并且在这样的心情中编写了derrida_general.m架构出了一个面向对象的流程结构，并且用协方差作为一个伪距离函数替代了平均值，获得了更多的信息。 这个时候的算法还是给了我一点小惊喜的，这直接导致我花了一个星期浏览它生成的Profile图片，大概收集了500条左右的有趣CA规则。但是浏览久了发现不对劲啊，这到底是我在筛选CA还是我的程序在筛选CA啊擦。（当然这个问题从我开始写算法时就一直有，也就是说算法的敏感度不错，真阳性基本都能检测到，但是假阳性也一堆一堆的，只有靠人工筛除）。</p>
+<p>思维跳跃如我，结合信息学最近上课学的多序列对齐（Multiple Sequence Alignment）猜想，能不能把CA的规则看成一条遗传信息，并且比较小的变异对其动力学性质的影响？ 一方面也希望能把MSA的想法应用进来，给出一个隐马尔可夫Profile，将会是一个非常漂亮的结果。随机变异过程倒是比较容易写，一两天就写完了，难在控制Alignment的深度，因为有些CA规则对变异一点都不敏感，18个比特你变掉三个它都无所谓，导致生成了巨大的团状Alignment，这个必须用算法进行控制。另一方面对这个树状图进行操作也需要一些新的编程技巧，以达到比较好的并行计算优化。 同时还花了三天帮室友修他的外星人，在EFI引导上栽了个大跟头，不过好在最后总算修好了Windows/Linux双系统。修系统无聊时就在琢磨把树状图显示出来，因为节点和连边一多起来Matlab的可视化就变得很慢，最后用vis.js做出了<a href="http://www.newflaw.com/blog/wp-content/uploads/2017/03/fibre.png">“毛毛毛球”</a>。</p>
+<p>然后我兴致冲冲地就去做随机测试了，结果......没卵用......仅仅发现了一些小的结论，比如B3/S23的18个比特里面有4个比特的变异是不太影响它的动力学的，其中两个的影响大一点(B7，S7的变异)，另外两个的变异几乎不产生影响（B8,S8），我称之为a2b2型。有趣/糟糕的是，a2b2型简直满地都是，但是和B3/S23的动力学性质没有半毛钱关系，我只好太息而弃。</p>
+<p>但是这里的另一个观察是，有一些强稳定的动力学可以经受7-8个比特的变异，给出～128左右的团簇。 我据此写了一个专门探测这些强稳规则的团簇边界，再找出混沌团簇的边界，以期在这两个团簇的交界处找到复杂的动力学性质，但是目前来看效果并不是特别好。</p>
+<p>故事：</p>
+<p>周一（03/06）早上正在改进团簇边界的算法，最后发现效果并不好，下午四点赶去上了一节动力系统的课程，结果老师貌似心情也不好一直在讲浅显/糟糕的废话，介绍了极限环理论，但是估计没有一个人听懂。他是学物理出身的，结果讲的时候一直在提系统论的概念，比如负反馈啊，延迟反馈啊，非线性啊，结果在座的这群生物狗估计一句都没听进去。。。然后老师提了个总结性问题：动力系统的极限环振荡解和谐振动的区别是？在座一片死机。 正解是：极限环震荡解的性质不依赖系统的初始状态，但是谐振子解的性质是虽初始状态而改变的，往深了讲是因为谐振子作为线性系统是保守的(Conservative)，而极限环往往是耗散(Dissipative)系统的渐进解，这本来是鲁棒性的一个极好体现，结果他对着生物狗强调了半天内部的数学结构。。。但是吧，非线性和生物之间到底有啥关系，的确也很难说请，老师对Hill Function的介绍还是很到位的，虽然他没能解释Hill的非线性和系统的鲁棒性到底有啥关系。</p>
+<p>上完了课肚子饿，不想回家，图书馆(Sci-Lib)浓浓的新生气息，编程没结果，死线就在周三，缺乏睡眠，你大概可以想像我到了一个多糟的境地。 为了防止把更多的时间浪费在方向不明的Coding上，我强迫自己在外面走走，恰巧ULU Student Hub 三楼在排练爵士乐，我就爬上去听了听，站在窗口看楼下过往的行人，放松放松：信号的本质是什么呢？伦敦的夜景我很少这样观察，远处WellcomeTrust的大楼闪烁着现代性，近处King's Church沉默在黑暗里。第一次，我站在这个高度俯瞰天天走过的Malet Street。 不断地搜索记忆，我想找出一丝线索： DerridaPlot之所以有用，FamilyTree之所以能被建构，背后靠的都是相关性函数，更进一步，FamilyTree比较的是同样的初始条件在两条相似的规则下的结果，并合并大量样本取一个协方差，但这个过程中所有的比特位都没有区别了。联想之前实践的平均场近似，只把0/1密度提取出来作为参数，而不关心具体的排列方式，这样处理CA显然是不妥当的，而且根据我之前的实验，如果把CA不断重新随机混合，得到的结果是非常符合平均场给出的结果的，但是一旦我去掉随机混合这个过程，平均场给出的近似和CA本身的动力学就没有半毛钱关系，这说明CA的空间不均匀性是非常核心的东西。同样的，如果对二维Ising不断进行混合/重排，其能量显然也不是不变的。取极端例子，本来是随机白噪音，假设重排成了一堆0和一堆1，显然能量有很大改变，所以Ising模型也是对空间不均匀性很敏感的。</p>
+<p>接下来就想怎么把CA的空间不均匀性抽象出来，于是想到了对同一个比特取一个延时摄影，并且取其平均为密度。本来这个操作的目的是移除闪光（Strobing）和高频闪烁的，但是很凑巧的是在真正Implement的过程中这个操作居然真的记录了空间不均性，也就是涨落。或者说，得到这个密度参数以后，只要观察这个密度在时间和空间上的统计行为，就能反映CA的动力学性质，而不取密度参直接用0/1（应该）是得不到这样的结果的，或者说会出一些别的问题。 当然这个算法也不完美，取0/1平均是有一定问题的，因为不同顺序相同密度的0/1序列蕴含的信息不一定相等，但是取0/1密度再做协方差的确是最简单最快的Implementation（相比共信息而言）。</p>
+<p>先写到这里，写完作业再来补。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+			
+		 </div>
+	    </article>
+
+	    <!--
+	    in case any image breaks the theme
+	    i was going to use :after but it didn't quite work for me, maybe next time-->
+	    <div class="clearfix"></div>
+
+
+
+	</div>
+    </div>
+</div>
+
+
+	    
+<div class="row">
+    <div class="alpha span9">
+	<ul>
+	    <li>Disqus Note: Please do not make personal attacks of any kind.</li>
+	</ul>
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+	var disqus_shortname = 'newflaw';
+	var disqus_identier = 'articles/maths/on-the-discovery-of-density-fluctuation-in-cellular-automataxie-zai-fa-xian-yuan-bao-zi-dong-ji-mi-du-zhang-luo-zhi-ji/';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    dsq.setAttribute('data-timestamp', +new Date());
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div></div>
+		    </div>
+		</div>
+<!-- Sidebar -->
+<aside class="span3  hidden-phone hidden-tablet">
+
+    <div class="widget-external-links widget">
+	<h3 class="widget-header">External Links</h3>
+	<div class="widget-content">
+	    <ul class="widget-list">
+		<li class="widget-list-item"><a href="https://stackoverflow.com/users/8083313/shouldsee">Stackoverflow</a></li>		<li class="widget-list-item"><a href="http://github.com/shouldsee"><img width="16" height="16" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></img> Github</a></li> 	    </ul>
+	</div>
+    </div>
+    <div class="widget-external-links widget">
+        <h3 class="widget-header">Recent Articles</h3>
+	<div class="widget-content">
+	    <ul class="widget-list">
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-zha-zha/" title="Read: 风城纪事·渣渣">风城纪事·渣渣</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/doremido-chi-lai-mi-chi/" title="Read: DoReMiDo // 哆来咪哆">DoReMiDo // 哆来咪哆</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-ou-yu/" title="Read: 风城纪事·偶遇">风城纪事·偶遇</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/program/how-to-fail-your-deadline-starting-learning-mysql-thinking-you-can-master-it-in-one-day-xiang-chao-shi-wan-cheng-ren-wu-lai-xue-mysqljiu-hao/" title="Read: How to fail your deadline? - Starting learning MySQL thinking you can master it in one day! // 想超时完成任务？来学MySQL就好！">How to fail your deadline? - Starting learning MySQL thinking you can master it in one day! // 想超时完成任务？来学MySQL就好！</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/story/feng-cheng-ji-shi-an-hei/" title="Read: 风城纪事·暗黑">风城纪事·暗黑</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/ruin-your-childhood-memory-from-digimons-to-colonialism-hui-tong-nian-zhi-hou-zhi-min-shu-ma-bao-bei/" title="Read: Ruin your childhood memory -- From Digimons to colonialism // 毁童年之后殖民数码宝贝">Ruin your childhood memory -- From Digimons to colonialism // 毁童年之后殖民数码宝贝</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-qu-dai/" title="Read: 风城纪事·取代">风城纪事·取代</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/gui-ji-qian-zheng-shang/" title="Read: 轨迹，签证，熵">轨迹，签证，熵</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/program/writing-python-modularly-pythonmo-kuai-hua-chu-bu/" title="Read: Writing Python modularly // Python模块化初步">Writing Python modularly // Python模块化初步</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-pian-jian/" title="Read: 风城纪事·偏见">风城纪事·偏见</a></li>
+	    </ul>
+	</div>
+    </div>
+    <div class="widget-archive-category widget">
+	<h3 class="widget-header">Category</h3>
+	<div class="widget-content">
+	    <ul class="widget-list">
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/list.html">list.<span>1</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/maths.html">maths.<span>7</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/misc.html">misc.<span>1</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/program.html">program.<span>2</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/story.html">story.<span>1</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/thoughts.html">thoughts.<span>11</span></a></li>
+
+	    </ul>
+	</div>
+    </div>
+    <div class="widget">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- dgzen he -->
+	<ins class="adsbygoogle"
+	    style="display:inline-block;width:300px;height:600px"
+	    data-ad-client="ca-pub-4442880234515975"
+	    data-ad-slot="1240455063"></ins>
+	<script>
+	    (adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+    </script>
+</div>
+		</aside>
+	    </div>
+	    <!--footer-->
+	    <div class="row">
+		<div class="span12">
+		    <footer>
+			<p>Powered by <a href="http://getpelican.org">Pelican</a>.</p>
+			<p><a href="">Nuja theme</a> designed by <a rel="bookmark" href="http://dgzen.pw">DGZen</a>.</p>
+		    </footer>
+		</div>
+	    </div>
+	</div>
+
+
+    </body>
+</html>

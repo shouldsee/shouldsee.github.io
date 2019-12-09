@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+    <head>
+	<meta charset="utf-8">
+
+<meta name="description" content="2017/02/14 L，叁，F 首先F抛出关于H1,H2和Derrida Plot的问题，询问在使用图论时原集合一般会内嵌在哪些度量空间(metric space)。 L：抛出了对图论联通性和拓扑联通性之间的区别。L指出联通图可以自然导出一个最短路径（通过广度优先搜索），从而定义一个有离散拓扑的度量空间，但是图之联通不能导出最短路径对应的离散拓扑之联通。原因在于，由于这个拓扑是离散拓扑，所以这个拓扑对应的图显然不连通（只要图中的元素大于等于两个），而且由于道路/路径联通蕴含连通性，所以图也就不道路联通了 …">
+<meta name="keywords" content="chinese,maths">
+<meta name="author" content="F. Geng">
+<meta name="robots" content="index,follow">
+
+
+<!-- OpenGraph -->
+<meta property="og:property" content="en">
+<meta property="og:title" content="记录_论可测变换或动力系统与度量函数的耦合_暨微扰论的拓展_1">
+<meta property="og:type" content="article">
+<meta property="og:description" content="2017/02/14 L，叁，F 首先F抛出关于H1,H2和Derrida Plot的问题，询问在使用图论时原集合一般会内嵌在哪些度量空间(metric space)。 L：抛出了对图论联通性和拓扑联通性之间的区别。L指出联通图可以自然导出一个最短路径（通过广度优先搜索），从而定义一个有离散拓扑的度量空间，但是图之联通不能导出最短路径对应的离散拓扑之联通。原因在于，由于这个拓扑是离散拓扑，所以这个拓扑对应的图显然不连通（只要图中的元素大于等于两个），而且由于道路/路径联通蕴含连通性，所以图也就不道路联通了 …">
+<meta property="article:published_time" content="2017-02-14">
+<meta property="article:tag" content="chinese">
+<meta property="article:tag" content="maths">
+<meta property="article:section" content="maths">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>记录_论可测变换或动力系统与度量函数的耦合_暨微扰论的拓展_1</title>
+	<script type="text/javascript" src="http://www.newflaw.com/blog/theme/js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="http://www.newflaw.com/blog/theme/js/bootstrap.js"></script>
+
+	<!-- Bootstrap CSS  -->
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/bootstrap.css"/>
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/responsive.css"/>
+	
+	<!-- Generated favicons markup -->
+	<link rel="apple-touch-icon" sizes="57x57" href="/assets/images/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/assets/images/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/images/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/assets/images/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/images/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/assets/images/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/images/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/assets/images/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/assets/images/favicons/manifest.json">
+	<link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
+	<meta name="msapplication-TileColor" content="#2b5797">
+	<meta name="msapplication-TileImage" content="/assets/images/favicons/mstile-144x144.png">
+	<meta name="msapplication-config" content="/assets/images/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<!-- LESS generated css for Nuja theme -->
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/NujaStructure.css"/>
+	<!-- Highlight -->
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/pygment.css"/>
+
+	<link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+	<!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+
+	<!-- setup feeds and third-party services -->
+	<link href="http://www.newflaw.com/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Newflaw Atom Feed" />
+	<!-- to clean up later for the new theme -->
+	<script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-968141-17', 'auto');
+ga('send', 'pageview');
+
+	</script>
+	<meta name="google-site-verification" content="4TETrzpAoVPu2-VrTpOxQJFmmynS9VzPq_boE45VKa8" />
+	<meta name="msvalidate.01" content="E2790C576E7623BE2F59AC965B48361D" />
+    </head>
+    <body>
+
+	<div class="container">
+	    <div class="header-container">
+		<header>
+		    <a href="http://www.newflaw.com/blog/">
+			<h4>Newflaw <span>Nature is never flawless</span></h4>		    </a>
+
+		    <nav>
+			<ul>
+			    <li><a href="http://www.newflaw.com/blog/">Home</a></li>
+			    <li><a href="http://www.newflaw.com/blog/about-me/">About Me</a></li>
+
+			    <li><a href="http://www.newflaw.com/blog/archives.html">Archive</a></li>
+
+			</ul>
+		    </nav>
+		</header>
+
+
+	    </div>
+	    <div class="clearfix"></div>
+	    <div class="row">
+		<div class="span9">
+
+		    <div class="span10">
+
+
+<div class="row">
+	
+	
+    <div class="span9 alpha">
+	<div class="entry-container ">
+
+	    <article  class="entry hentry" >
+		<header>
+		    <a href="http://www.newflaw.com/blog/articles/maths/ji-lu-_lun-ke-ce-bian-huan-huo-dong-li-xi-tong-yu-du-liang-han-shu-de-ou-he-_ji-wei-rao-lun-de-tuo-zhan-_1/" rel="bookmark" title="permalink for 记录_论可测变换或动力系统与度量函数的耦合_暨微扰论的拓展_1" ><h2 class="entry-title">记录_论可测变换或动力系统与度量函数的耦合_暨微扰论的拓展_1</h2></a>
+		    <div class="author-details vcard">
+
+			by <a  class="url fn" href="http://www.newflaw.com/blog/author/f-geng/">F. Geng</a>  
+		    . Category: <a href="http://www.newflaw.com/blog/category/maths.html">maths</a>. 
+			    Tags: 
+ <a href="http://www.newflaw.com/blog/tag/chinese/" title="Browse tag: chinese" rel="tag">chinese</a>,  <a href="http://www.newflaw.com/blog/tag/maths/" title="Browse tag: maths" rel="tag">maths</a>		    <br> Last Updated: February 14, 2017
+ 		</div>
+		</header>
+		<div class="entry-content">
+		<p>2017/02/14 L，叁，F</p>
+<p>首先F抛出关于H1,H2和Derrida Plot的问题，询问在使用图论时原集合一般会内嵌在哪些度量空间(metric space)。</p>
+<p>L：抛出了对图论联通性和拓扑联通性之间的区别。L指出联通图可以自然导出一个最短路径（通过广度优先搜索），从而定义一个有离散拓扑的度量空间，但是图之联通不能导出最短路径对应的离散拓扑之联通。原因在于，由于这个拓扑是离散拓扑，所以这个拓扑对应的图显然不连通（只要图中的元素大于等于两个），而且由于道路/路径联通蕴含连通性，所以图也就不道路联通了。</p>
+<p>叁：单单给出一个集合(Set)并不能唯一地确定一个度量空间。额外地，我们需要赋予这个集合某些结构，比如说把它们按某种方法排成一排，计算距离就行了，但单单给出一个集合是不能确定度量空间的。</p>
+<p>L：总之，图论中最完全的信息，由边和顶点共同提供，可以人为地给图定义一些度量空间，但是这个度量在使用时要当心（叁：估计刘大师的意思是，图里的metric（比如由连接两点的最少的边的数量决定）并不是一个真正的metric space里的metric）。或者说是在套用metric space的结论时，要小心图论和拓扑空间之间术语的区别。</p>
+<p>叁：虽然我没有完全听懂，不过问题应该出在三角不等式 ，而不是连通性上吧？因为就算是真正的度量空间里面的开球也不一定是联通的。</p>
+<p>L：嗯其实是个metric，主要是连通性不一致可能会出错。譬如图论中的道路和拓扑空间就有点不一样。</p>
+<p>F：让我重新表述一下我的问题：
+假设一个有限集合S 有一个测度 <span class="math">\(\mu(S)\)</span>，（L:为严谨，S的<span class="math">\(\sigma\)</span>代数是S的power set，<span class="math">\(\mu: \sigma(S) \rightarrow [0,1]\)</span>，而且<span class="math">\(\mu\)</span>满足并集相加），那么给定一个转移矩阵（Transition matrix ，也就是带强度的Edge matrix），令为 <span class="math">\(\pi\)</span> 。那令 <span class="math">\(\mu_2=\pi * \mu_1\)</span>，则<span class="math">\(\pi\)</span>是一个可测变换（这里的乘法定义是矩阵乘法）。根据马尔可夫链基本定理(THE FUNDAMENTAL THEOREM OF MARKOV CHAINS），如果 <span class="math">\(\pi\)</span> 的性质足够好，那么 <span class="math">\(\pi\)</span> 重复作用之后测度 <span class="math">\(\mu\)</span> 的是驻定的，但驻定这个条件还并不是最重要的。
+现在有趣的是，S本身有一个内构的度量是汉明距离：<span class="math">\(H(S_a,S_b)\)</span>，（附：两条长度为n的有x个字符是不同的序列之间的汉明距离 <span class="math">\(H=\frac{x}{n}\)</span> ，当然除以n 不是必要的，只是一步正规化）。现在如果 <span class="math">\(\pi\)</span> 应一个有向图（directed graph），也就是说每个元素只能有一个下家，且定义这条边强度为1,那么给出 <span class="math">\( a_2=\pi(a_1)\)</span>, <span class="math">\(b_2=\pi(b_2)\)</span>，现在我们考察 <span class="math">\(H(a_1,b_1), H(a_2,b_2)\)</span> 之间的关系 （简称 <span class="math">\(H_1,H_2\)</span> ）。
+联系微扰理论(perturbation theory)，讨论同一个微分方程 <span class="math">\(\frac{dx}{dt} = f(x)\)</span>，从x0开始会给出一条轨迹x(t)，从x0+e会给出另一条轨迹x’(t)，通过考察 <span class="math">\(\frac{d(|x' - x|)}{dt} =g(|x' -x|)\)</span> 可以得出系统的复杂度/渐进稳定性（这里g可以从f和x0导出）。注意到我们使用了一个度量|x’-x|，在微分动力系统中这个度量常常是L2-norm，也就是欧几里得距离，也就是说，我们考察的是L2度量在微分动力系统下的行为，以理解该动力系统的混沌性。相应的，在前一个例子中，我们考察的是汉明度量在可测变换下的行为，理论上这可以体现出该可测变换的混沌性。但是需要注意的是，经典微扰理论关心的是|x’-x|极小时的行为，离散扰动理论却被迫关心H1和H2之间的统计联系，因为对H1取极小并不是一个极为自然的选择。</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+			
+		 </div>
+	    </article>
+
+	    <!--
+	    in case any image breaks the theme
+	    i was going to use :after but it didn't quite work for me, maybe next time-->
+	    <div class="clearfix"></div>
+
+
+
+	</div>
+    </div>
+</div>
+
+
+	    
+<div class="row">
+    <div class="alpha span9">
+	<ul>
+	    <li>Disqus Note: Please do not make personal attacks of any kind.</li>
+	</ul>
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+	var disqus_shortname = 'newflaw';
+	var disqus_identier = 'articles/maths/ji-lu-_lun-ke-ce-bian-huan-huo-dong-li-xi-tong-yu-du-liang-han-shu-de-ou-he-_ji-wei-rao-lun-de-tuo-zhan-_1/';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    dsq.setAttribute('data-timestamp', +new Date());
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div></div>
+		    </div>
+		</div>
+<!-- Sidebar -->
+<aside class="span3  hidden-phone hidden-tablet">
+
+    <div class="widget-external-links widget">
+	<h3 class="widget-header">External Links</h3>
+	<div class="widget-content">
+	    <ul class="widget-list">
+		<li class="widget-list-item"><a href="https://stackoverflow.com/users/8083313/shouldsee">Stackoverflow</a></li>		<li class="widget-list-item"><a href="http://github.com/shouldsee"><img width="16" height="16" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></img> Github</a></li> 	    </ul>
+	</div>
+    </div>
+    <div class="widget-external-links widget">
+        <h3 class="widget-header">Recent Articles</h3>
+	<div class="widget-content">
+	    <ul class="widget-list">
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-zha-zha/" title="Read: 风城纪事·渣渣">风城纪事·渣渣</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/doremido-chi-lai-mi-chi/" title="Read: DoReMiDo // 哆来咪哆">DoReMiDo // 哆来咪哆</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-ou-yu/" title="Read: 风城纪事·偶遇">风城纪事·偶遇</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/program/how-to-fail-your-deadline-starting-learning-mysql-thinking-you-can-master-it-in-one-day-xiang-chao-shi-wan-cheng-ren-wu-lai-xue-mysqljiu-hao/" title="Read: How to fail your deadline? - Starting learning MySQL thinking you can master it in one day! // 想超时完成任务？来学MySQL就好！">How to fail your deadline? - Starting learning MySQL thinking you can master it in one day! // 想超时完成任务？来学MySQL就好！</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/story/feng-cheng-ji-shi-an-hei/" title="Read: 风城纪事·暗黑">风城纪事·暗黑</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/ruin-your-childhood-memory-from-digimons-to-colonialism-hui-tong-nian-zhi-hou-zhi-min-shu-ma-bao-bei/" title="Read: Ruin your childhood memory -- From Digimons to colonialism // 毁童年之后殖民数码宝贝">Ruin your childhood memory -- From Digimons to colonialism // 毁童年之后殖民数码宝贝</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-qu-dai/" title="Read: 风城纪事·取代">风城纪事·取代</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/gui-ji-qian-zheng-shang/" title="Read: 轨迹，签证，熵">轨迹，签证，熵</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/program/writing-python-modularly-pythonmo-kuai-hua-chu-bu/" title="Read: Writing Python modularly // Python模块化初步">Writing Python modularly // Python模块化初步</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-pian-jian/" title="Read: 风城纪事·偏见">风城纪事·偏见</a></li>
+	    </ul>
+	</div>
+    </div>
+    <div class="widget-archive-category widget">
+	<h3 class="widget-header">Category</h3>
+	<div class="widget-content">
+	    <ul class="widget-list">
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/list.html">list.<span>1</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/maths.html">maths.<span>7</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/misc.html">misc.<span>1</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/program.html">program.<span>2</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/story.html">story.<span>1</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/thoughts.html">thoughts.<span>11</span></a></li>
+
+	    </ul>
+	</div>
+    </div>
+    <div class="widget">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- dgzen he -->
+	<ins class="adsbygoogle"
+	    style="display:inline-block;width:300px;height:600px"
+	    data-ad-client="ca-pub-4442880234515975"
+	    data-ad-slot="1240455063"></ins>
+	<script>
+	    (adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+    </script>
+</div>
+		</aside>
+	    </div>
+	    <!--footer-->
+	    <div class="row">
+		<div class="span12">
+		    <footer>
+			<p>Powered by <a href="http://getpelican.org">Pelican</a>.</p>
+			<p><a href="">Nuja theme</a> designed by <a rel="bookmark" href="http://dgzen.pw">DGZen</a>.</p>
+		    </footer>
+		</div>
+	    </div>
+	</div>
+
+
+    </body>
+</html>

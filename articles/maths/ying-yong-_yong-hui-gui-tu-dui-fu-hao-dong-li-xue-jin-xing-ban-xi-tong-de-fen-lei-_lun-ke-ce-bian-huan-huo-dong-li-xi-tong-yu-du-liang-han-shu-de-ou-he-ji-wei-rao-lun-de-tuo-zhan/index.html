@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+    <head>
+	<meta charset="utf-8">
+
+<meta name="description" content="以相关性(correlation)为度量的回归图忠实地反映了基础元胞自动机(ECA)的动力学性质，可以很好地区分稳态和混沌态。 我对Logistic Mapping做了简单的耦合推广，并应用回归图找到了处在混沌边界的参数，有趣的是这种推广系统也处在混沌边界。 讨论：二维元胞自动机是一个幻象，它并不比一维元胞高明到哪里去，对于Glider和Pattern的分类看起来没有发展壮大的希望。CA和物理学的联系目前还是太弱了，需要一些契机把CA爱好者引导到更有建设性的道路上。Wolfram对Rule110的阐释是很有insight的，但是他本人最后也认识到CA有一些内在的缺陷使其不能模拟神经网络。我希望Derrida Plot的复兴可以改变这一情况，这一工具允许人们更加系统地对自动机的动力学性质进行分类，而且和微扰论有很深的联系，希望有更多的人参与到这个研究里来。 这里用一个二维BS元胞自动机为例子(B013468 …">
+<meta name="keywords" content="chinese,maths">
+<meta name="author" content="F. Geng">
+<meta name="robots" content="index,follow">
+
+
+<!-- OpenGraph -->
+<meta property="og:property" content="en">
+<meta property="og:title" content="应用_用回归图对符号动力学进行半系统的分类_论可测变换或动力系统与度量函数的耦合暨微扰论的拓展">
+<meta property="og:type" content="article">
+<meta property="og:description" content="以相关性(correlation)为度量的回归图忠实地反映了基础元胞自动机(ECA)的动力学性质，可以很好地区分稳态和混沌态。 我对Logistic Mapping做了简单的耦合推广，并应用回归图找到了处在混沌边界的参数，有趣的是这种推广系统也处在混沌边界。 讨论：二维元胞自动机是一个幻象，它并不比一维元胞高明到哪里去，对于Glider和Pattern的分类看起来没有发展壮大的希望。CA和物理学的联系目前还是太弱了，需要一些契机把CA爱好者引导到更有建设性的道路上。Wolfram对Rule110的阐释是很有insight的，但是他本人最后也认识到CA有一些内在的缺陷使其不能模拟神经网络。我希望Derrida Plot的复兴可以改变这一情况，这一工具允许人们更加系统地对自动机的动力学性质进行分类，而且和微扰论有很深的联系，希望有更多的人参与到这个研究里来。 这里用一个二维BS元胞自动机为例子(B013468 …">
+<meta property="article:published_time" content="2017-02-15">
+<meta property="article:tag" content="chinese">
+<meta property="article:tag" content="maths">
+<meta property="article:section" content="maths">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>应用_用回归图对符号动力学进行半系统的分类_论可测变换或动力系统与度量函数的耦合暨微扰论的拓展</title>
+	<script type="text/javascript" src="http://www.newflaw.com/blog/theme/js/jquery-1.9.1.js"></script>
+	<script type="text/javascript" src="http://www.newflaw.com/blog/theme/js/bootstrap.js"></script>
+
+	<!-- Bootstrap CSS  -->
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/bootstrap.css"/>
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/responsive.css"/>
+	
+	<!-- Generated favicons markup -->
+	<link rel="apple-touch-icon" sizes="57x57" href="/assets/images/favicons/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/assets/images/favicons/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/assets/images/favicons/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/assets/images/favicons/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/assets/images/favicons/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/assets/images/favicons/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/assets/images/favicons/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/assets/images/favicons/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicons/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/assets/images/favicons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/assets/images/favicons/manifest.json">
+	<link rel="shortcut icon" href="/assets/images/favicons/favicon.ico">
+	<meta name="msapplication-TileColor" content="#2b5797">
+	<meta name="msapplication-TileImage" content="/assets/images/favicons/mstile-144x144.png">
+	<meta name="msapplication-config" content="/assets/images/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+	<!-- LESS generated css for Nuja theme -->
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/NujaStructure.css"/>
+	<!-- Highlight -->
+	<link rel="stylesheet" href="http://www.newflaw.com/blog/theme/css/pygment.css"/>
+
+	<link href="http://fonts.googleapis.com/css?family=Droid+Serif" rel="stylesheet" type="text/css">
+	<link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+	<!--[if IE]>
+	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+
+
+	<!-- setup feeds and third-party services -->
+	<link href="http://www.newflaw.com/blog/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Newflaw Atom Feed" />
+	<!-- to clean up later for the new theme -->
+	<script>
+	    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-968141-17', 'auto');
+ga('send', 'pageview');
+
+	</script>
+	<meta name="google-site-verification" content="4TETrzpAoVPu2-VrTpOxQJFmmynS9VzPq_boE45VKa8" />
+	<meta name="msvalidate.01" content="E2790C576E7623BE2F59AC965B48361D" />
+    </head>
+    <body>
+
+	<div class="container">
+	    <div class="header-container">
+		<header>
+		    <a href="http://www.newflaw.com/blog/">
+			<h4>Newflaw <span>Nature is never flawless</span></h4>		    </a>
+
+		    <nav>
+			<ul>
+			    <li><a href="http://www.newflaw.com/blog/">Home</a></li>
+			    <li><a href="http://www.newflaw.com/blog/about-me/">About Me</a></li>
+
+			    <li><a href="http://www.newflaw.com/blog/archives.html">Archive</a></li>
+
+			</ul>
+		    </nav>
+		</header>
+
+
+	    </div>
+	    <div class="clearfix"></div>
+	    <div class="row">
+		<div class="span9">
+
+		    <div class="span10">
+
+
+<div class="row">
+	
+	
+    <div class="span9 alpha">
+	<div class="entry-container ">
+
+	    <article  class="entry hentry" >
+		<header>
+		    <a href="http://www.newflaw.com/blog/articles/maths/ying-yong-_yong-hui-gui-tu-dui-fu-hao-dong-li-xue-jin-xing-ban-xi-tong-de-fen-lei-_lun-ke-ce-bian-huan-huo-dong-li-xi-tong-yu-du-liang-han-shu-de-ou-he-ji-wei-rao-lun-de-tuo-zhan/" rel="bookmark" title="permalink for 应用_用回归图对符号动力学进行半系统的分类_论可测变换或动力系统与度量函数的耦合暨微扰论的拓展" ><h2 class="entry-title">应用_用回归图对符号动力学进行半系统的分类_论可测变换或动力系统与度量函数的耦合暨微扰论的拓展</h2></a>
+		    <div class="author-details vcard">
+
+			by <a  class="url fn" href="http://www.newflaw.com/blog/author/f-geng/">F. Geng</a>  
+		    . Category: <a href="http://www.newflaw.com/blog/category/maths.html">maths</a>. 
+			    Tags: 
+ <a href="http://www.newflaw.com/blog/tag/chinese/" title="Browse tag: chinese" rel="tag">chinese</a>,  <a href="http://www.newflaw.com/blog/tag/maths/" title="Browse tag: maths" rel="tag">maths</a>		    <br> Last Updated: February 15, 2017
+ 		</div>
+		</header>
+		<div class="entry-content">
+		<p>以相关性(correlation)为度量的回归图忠实地反映了基础元胞自动机(ECA)的动力学性质，可以很好地区分稳态和混沌态。</p>
+<p>我对Logistic Mapping做了简单的耦合推广，并应用回归图找到了处在混沌边界的参数，有趣的是这种推广系统也处在混沌边界。</p>
+<p><img class="alignnone size-full wp-image-253" src="http://www.newflaw.com/blog/wp-content/uploads/2017/02/demo_log_torus.jpg" alt="demo_log_torus" width="2409" height="436" /></p>
+<p><img class="alignnone size-full wp-image-304" src="http://www.newflaw.com/blog/wp-content/uploads/2017/02/logistic__3-811_corrprofile.jpg" alt="logistic__3-811_corrprofile" width="1000" height="563" /></p>
+<p>讨论：二维元胞自动机是一个幻象，它并不比一维元胞高明到哪里去，对于Glider和Pattern的分类看起来没有发展壮大的希望。CA和物理学的联系目前还是太弱了，需要一些契机把CA爱好者引导到更有建设性的道路上。Wolfram对Rule110的阐释是很有insight的，但是他本人最后也认识到CA有一些内在的缺陷使其不能模拟神经网络。我希望Derrida Plot的复兴可以改变这一情况，这一工具允许人们更加系统地对自动机的动力学性质进行分类，而且和微扰论有很深的联系，希望有更多的人参与到这个研究里来。</p>
+<p>这里用一个二维BS元胞自动机为例子(B013468/S23,生命游戏是B3/S23),大致介绍一下Covariance Profile的具体操作办法，用一个常值分布随机取两个初始状态，计算它们的距离H(0),接下来用CA规则将两个初态分别迭代T次，并记录它们的轨迹。这样我们可以得到H(1),H(2),H(3)....H(T). 然后把上述操作重复N次。想象[H(1),H(2)]在平面内确定一个点，由于有N个样本，我们可以确定N个点，这时候我们可以计算H(1),H(2)的统计学关系(一开始我用的是相关性(Pearson Correlation),后面发现不够灵敏，于是换成了协方差(Covariance)</p>
+<p><img class="alignnone size-full wp-image-306" src="http://www.newflaw.com/blog/wp-content/uploads/2017/02/expanded6491tca.jpg" alt="expanded6491tca" width="735" height="661" /></p>
+<p>对于任选的H(t_a),H(t_b),我们都可以确定一个分布并且抽象成一个单值。将这些单值集合起来之后，我们就的到了刚刚看到的热相图。</p>
+<p><img class="alignnone size-full wp-image-308" src="http://www.newflaw.com/blog/wp-content/uploads/2017/02/collected6491tca.jpg" alt="collected6491tca" width="497" height="416" /></p>
+<p>(这里的单值用的都是协方差。)</p>
+<p>我的观察是，热相图的凹凸性可以很好地刻画原系统的动力学性质。可以看到这个热相图的对角线有一个凹扩散，这一般对应复杂的动力学（complex,相对于混沌 chaotic，稳定 stable而言）</p>
+<p>待续</p>
+<p>Comments: </p>
+<ol>
+<li>
+<p>Yanbo Zhang zhangyb1"AT"mail.ustc.edu.cn: Logistic Mapping 的想法非常有意思，似乎只用一个参数k就出现了Wolfram的四个基本类型。我在想，是否可以对离散元胞自动机做逆向的工作，从时空图直接反推到k，从而得到一个意义非常明确的序参量。</p>
+</li>
+<li>
+<p>shouldsee: 我现在的想法是完全用密度涨落来描述动力学性质，而不是用DerridaPlot。 把密度涨落抽象成几个Scalar的序参量应该是可行的，但是我还没有仔细考虑什么样的抽取办法是推广性最好的，因为目前这个抽取办法挺初等的，还缺少很多形式上的工作，只是从实用的角度发现还挺有用。</p>
+</li>
+</ol>
+			
+		 </div>
+	    </article>
+
+	    <!--
+	    in case any image breaks the theme
+	    i was going to use :after but it didn't quite work for me, maybe next time-->
+	    <div class="clearfix"></div>
+
+
+
+	</div>
+    </div>
+</div>
+
+
+	    
+<div class="row">
+    <div class="alpha span9">
+	<ul>
+	    <li>Disqus Note: Please do not make personal attacks of any kind.</li>
+	</ul>
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+	var disqus_shortname = 'newflaw';
+	var disqus_identier = 'articles/maths/ying-yong-_yong-hui-gui-tu-dui-fu-hao-dong-li-xue-jin-xing-ban-xi-tong-de-fen-lei-_lun-ke-ce-bian-huan-huo-dong-li-xi-tong-yu-du-liang-han-shu-de-ou-he-ji-wei-rao-lun-de-tuo-zhan/';
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	    dsq.setAttribute('data-timestamp', +new Date());
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div></div>
+		    </div>
+		</div>
+<!-- Sidebar -->
+<aside class="span3  hidden-phone hidden-tablet">
+
+    <div class="widget-external-links widget">
+	<h3 class="widget-header">External Links</h3>
+	<div class="widget-content">
+	    <ul class="widget-list">
+		<li class="widget-list-item"><a href="https://stackoverflow.com/users/8083313/shouldsee">Stackoverflow</a></li>		<li class="widget-list-item"><a href="http://github.com/shouldsee"><img width="16" height="16" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"></img> Github</a></li> 	    </ul>
+	</div>
+    </div>
+    <div class="widget-external-links widget">
+        <h3 class="widget-header">Recent Articles</h3>
+	<div class="widget-content">
+	    <ul class="widget-list">
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-zha-zha/" title="Read: 风城纪事·渣渣">风城纪事·渣渣</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/doremido-chi-lai-mi-chi/" title="Read: DoReMiDo // 哆来咪哆">DoReMiDo // 哆来咪哆</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-ou-yu/" title="Read: 风城纪事·偶遇">风城纪事·偶遇</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/program/how-to-fail-your-deadline-starting-learning-mysql-thinking-you-can-master-it-in-one-day-xiang-chao-shi-wan-cheng-ren-wu-lai-xue-mysqljiu-hao/" title="Read: How to fail your deadline? - Starting learning MySQL thinking you can master it in one day! // 想超时完成任务？来学MySQL就好！">How to fail your deadline? - Starting learning MySQL thinking you can master it in one day! // 想超时完成任务？来学MySQL就好！</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/story/feng-cheng-ji-shi-an-hei/" title="Read: 风城纪事·暗黑">风城纪事·暗黑</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/ruin-your-childhood-memory-from-digimons-to-colonialism-hui-tong-nian-zhi-hou-zhi-min-shu-ma-bao-bei/" title="Read: Ruin your childhood memory -- From Digimons to colonialism // 毁童年之后殖民数码宝贝">Ruin your childhood memory -- From Digimons to colonialism // 毁童年之后殖民数码宝贝</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-qu-dai/" title="Read: 风城纪事·取代">风城纪事·取代</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/gui-ji-qian-zheng-shang/" title="Read: 轨迹，签证，熵">轨迹，签证，熵</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/program/writing-python-modularly-pythonmo-kuai-hua-chu-bu/" title="Read: Writing Python modularly // Python模块化初步">Writing Python modularly // Python模块化初步</a></li>
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/articles/thoughts/feng-cheng-ji-shi-pian-jian/" title="Read: 风城纪事·偏见">风城纪事·偏见</a></li>
+	    </ul>
+	</div>
+    </div>
+    <div class="widget-archive-category widget">
+	<h3 class="widget-header">Category</h3>
+	<div class="widget-content">
+	    <ul class="widget-list">
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/list.html">list.<span>1</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/maths.html">maths.<span>7</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/misc.html">misc.<span>1</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/program.html">program.<span>2</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/story.html">story.<span>1</span></a></li>
+
+		<li class="widget-list-item"><a href="http://www.newflaw.com/blog/category/thoughts.html">thoughts.<span>11</span></a></li>
+
+	    </ul>
+	</div>
+    </div>
+    <div class="widget">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<!-- dgzen he -->
+	<ins class="adsbygoogle"
+	    style="display:inline-block;width:300px;height:600px"
+	    data-ad-client="ca-pub-4442880234515975"
+	    data-ad-slot="1240455063"></ins>
+	<script>
+	    (adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+    </script>
+</div>
+		</aside>
+	    </div>
+	    <!--footer-->
+	    <div class="row">
+		<div class="span12">
+		    <footer>
+			<p>Powered by <a href="http://getpelican.org">Pelican</a>.</p>
+			<p><a href="">Nuja theme</a> designed by <a rel="bookmark" href="http://dgzen.pw">DGZen</a>.</p>
+		    </footer>
+		</div>
+	    </div>
+	</div>
+
+
+    </body>
+</html>
